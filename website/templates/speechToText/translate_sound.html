@@ -6,47 +6,40 @@
 <div class="container mt-4">
     <div class="card">
         <div class="card-body">
-            <h2>Tłumacz plik dźwiękowy</h2>
+            <h2>Translate sound to text</h2>
             <form id="sound-form" enctype="multipart/form-data" method="post">
                 {% csrf_token %}
                 <div class="mb-3">
-                    <label for="sound-file" class="form-label">Wybierz plik dźwiękowy:</label>
+                    <label for="sound-file" class="form-label">Choose your audio file:</label>
                     <input type="file" id="sound-file" name="sound_file" accept="audio/*" class="form-control" required>
                 </div>
 
                 <div class="mb-3">
-                    <label for="language-select-source" class="form-label">Wybierz język dźwięku:</label>
-                    <select id="language-select-source" name="source_language" class="form-control">
-                        <option value="auto">Wykrywanie języka</option>
-                        <option value="en">Angielski</option>
-                        <option value="pl">Polski</option>
-                        <option value="de">Niemiecki</option>
-                        <option value="fr">Francuski</option>
-                        <option value="es">Hiszpański</option>
-                        <option value="it">Włoski</option>
-                        <option value="ru">Rosyjski</option>
-                        <!-- Dodaj inne języki w zależności od potrzeb -->
+                    <label for="language-select-source" class="form-label">Select source audio file language:</label>
+                    <select id="language-sound" name="language_sound" class="form-control">
+                        {% for code, name in languages.items %}
+                            <option value="{{ code }}" {% if code == selected_language_before %}selected{% endif %}>
+                                {{ name }}
+                            </option>
+                        {% endfor %}
                     </select>
                 </div>
 
                 <div class="mb-3">
-                    <label for="language-select-target" class="form-label">Wybierz język tłumaczenia:</label>
-                    <select id="language-select-target" name="target_language" class="form-control">
-                        <option value="en">Angielski</option>
-                        <option value="pl">Polski</option>
-                        <option value="de">Niemiecki</option>
-                        <option value="fr">Francuski</option>
-                        <option value="es">Hiszpański</option>
-                        <option value="it">Włoski</option>
-                        <option value="ru">Rosyjski</option>
-                        <!-- Dodaj inne języki w zależności od potrzeb -->
+                    <label for="language-select-target" class="form-label">Select target text language:</label>
+                    <select id="language-sound" name="language_sound" class="form-control">
+                        {% for code, name in languages.items %}
+                            <option value="{{ code }}" {% if code == selected_language_before %}selected{% endif %}>
+                                {{ name }}
+                            </option>
+                        {% endfor %}
                     </select>
                 </div>
 
-                <button type="submit" class="btn btn-custom">Tłumacz</button>
+                <button type="submit" class="btn btn-custom">Translate</button>
             </form>
 
-            <h2 class="mt-4">Przetłumaczony tekst:</h2>
+            <h2 class="mt-4">Translated text:</h2>
             <div id="translated-text" class="alert alert-secondary"></div>
         </div>
     </div>

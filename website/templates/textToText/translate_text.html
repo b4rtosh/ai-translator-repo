@@ -10,19 +10,19 @@
                 {% csrf_token %}
                 <div class="mb-3">
                     <label for="input_text" class="form-label">Wprowadź tekst:</label>
-                    <textarea id="input_text" name="input_text" class="form-control" rows="3" required></textarea>
+                    <textarea id="input_text" name="input_text" class="form-control" rows="3" required>{{ input_text }}</textarea>
                 </div>
                 <div class="mb-3">
-                    <label for="source-language-select" class="form-label">Wybierz język źródłowy:</label>
-                    <select id="source-language-select" name="source_language" class="form-control">
+                    <label for="source_language_select" class="form-label">Wybierz język źródłowy:</label>
+                    <select id="source_language_select" name="source_language" class="form-control">
                         <option value="auto">Wykrywanie języka</option>
                         <option value="en">Angielski</option>
                         <option value="pl">Polski</option>
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label for="target-language-select" class="form-label">Wybierz język docelowy:</label>
-                    <select id="target-language-select" name="target_language" class="form-control" required>
+                    <label for="target_language_select" class="form-label">Wybierz język docelowy:</label>
+                    <select id="target_language_select" name="target_language" class="form-control" required>
                         <option value="en">Angielski</option>
                         <option value="pl">Polski</option>
                     </select>

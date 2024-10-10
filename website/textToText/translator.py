@@ -16,7 +16,8 @@ def translateToFrom(langFrom, langTo, text):
 
     path = '/translate'
     constructed_url = endpoint + path
-
+    if langFrom == 'auto':
+        langFrom = ''
     params = {
         'api-version': '3.0',
         'from': langFrom,

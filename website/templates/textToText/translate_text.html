@@ -6,7 +6,7 @@
     <div class="card">
         <div class="card-body">
             <h2>Tłumacz tekst</h2>
-            <form id="text-form" method="post" action="{% url 'translate_text' %}">
+            <form id="text-form" method="post" action="{% url 'text_to_text_view' %}">
                 {% csrf_token %}
                 <div class="mb-3">
                     <label for="input_text" class="form-label">Wprowadź tekst:</label>

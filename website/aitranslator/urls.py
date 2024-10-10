@@ -21,7 +21,7 @@ from django.urls import path, include
 urlpatterns = [
     path('', include("home.urls")),
     path('admin/', admin.site.urls),
-    path("translate/", include("textToText.urls")),
-    path("transcribe/", include("speechToText.urls")),
-    path("speech/", include("speechToSpeech.urls")),
+    path('translate/', include("textToText.urls")),
+    path('transcribe/', include("speechToText.urls")),
+    path('speech/', include("speechToSpeech.urls")),
 ]

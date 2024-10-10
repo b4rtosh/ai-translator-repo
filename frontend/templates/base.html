@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Translator App{% endblock %}</title>
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #CDE8E5;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .header, .footer {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .btn-custom {
+            background-color: #7AB2B2;
+            color: #EEF7FF;
+        }
+    </style>
+</head>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand ml-3" >Translator</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'home' %}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'translate_text' %}">Translate from Text to Text</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'translate_sound' %}">Translate from Sound to Text</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'translate_sound_sound' %}">Translate from Sound to Sound</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>{% block header %}Welcome to the Translator App{% endblock %}</h1>
+        </div>
+
+        {% block content %}
+        {% endblock %}
+
+        <div class="footer">
+            <p>© 2024 DR BP TJ</p>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</body>
+</html>

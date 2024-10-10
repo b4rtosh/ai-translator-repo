@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Translate Sound to Sound{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-body">
+            <h2>Tłumacz dźwięk na dźwięk</h2>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="audio-file" class="form-label">Wybierz plik audio:</label>
+                    <input type="file" id="audio-file" name="audio_file" class="form-control" accept="audio/*" required>
+                </div>
+                <div class="mb-3">
+                    <label for="language-sound" class="form-label">Wybierz język pliku audio:</label>
+                    <select id="language-sound" name="language_sound" class="form-control">
+                        <option value="en">Angielski</option>
+                        <option value="pl">Polski</option>
+                        <option value="de">Niemiecki</option>
+                        <option value="fr">Francuski</option>
+                        <option value="es">Hiszpański</option>
+                        <option value="it">Włoski</option>
+                        <option value="ru">Rosyjski</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="language" class="form-label">Wybierz język docelowy:</label>
+                    <select id="language" name="language" class="form-control">
+                        <option value="en">Angielski</option>
+                        <option value="pl">Polski</option>
+                        <option value="de">Niemiecki</option>
+                        <option value="fr">Francuski</option>
+                        <option value="es">Hiszpański</option>
+                        <option value="it">Włoski</option>
+                        <option value="ru">Rosyjski</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-custom">Tłumacz</button>
+            </form>
+            <div class="mt-4">
+                <label for="output-folder" class="form-label">Wybierz folder do zapisania pliku:</label>
+                <input type="folder" id="output-folder" name="output_folder" class="form-control" placeholder="Wprowadź ścieżkę folderu" required>
+            </div>
+        </div>
+    </div>
+{% endblock %}

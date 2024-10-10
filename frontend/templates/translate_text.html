@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Translate Text{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-body">
+            <h2>Tłumacz tekst</h2>
+            <form id="text-form" method="post" action="{% url 'translate_text' %}">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="input_text" class="form-label">Wprowadź tekst:</label>
+                    <textarea id="input_text" name="input_text" class="form-control" rows="3" required></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="source-language-select" class="form-label">Wybierz język źródłowy:</label>
+                    <select id="source-language-select" name="source_language" class="form-control">
+                        <option value="auto">Wykrywanie języka</option>
+                        <option value="en">Angielski</option>
+                        <option value="pl">Polski</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="target-language-select" class="form-label">Wybierz język docelowy:</label>
+                    <select id="target-language-select" name="target_language" class="form-control" required>
+                        <option value="en">Angielski</option>
+                        <option value="pl">Polski</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-custom">Tłumacz</button>
+            </form>
+
+            {% if translated_text %}
+                <h2 class="mt-4">Przetłumaczony tekst:</h2>
+                <div id="translated-text" class="alert alert-secondary">
+                    {{ translated_text }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

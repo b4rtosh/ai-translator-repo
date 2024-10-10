@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - Translator{% endblock %}
+
+{% block header %}Welcome to the Translator App{% endblock %}
+
+{% block content %}
+    <div class="text-center">
+        <a href="{% url 'translate_text' %}" class="btn btn-lg btn-custom mx-2">Translate Text</a>
+        <a href="{% url 'translate_sound' %}" class="btn btn-lg btn-custom mx-2">Translate Sound File to Text</a>
+    <a href="{% url 'translate_sound_sound' %}" class="btn btn-lg btn-custom mx-2">Translate Sound File to Sound</a>
+    </div>
+{% endblock %}

@@ -19,7 +19,9 @@ from django.urls import path, include
 
 
 urlpatterns = [
+    path('', include("home.urls")),
     path('admin/', admin.site.urls),
-    path("text/", include("textTotText.urls")),
-
+    path("translate/", include("textTotText.urls")),
+    path("transcribe/", include("speechToText.urls")),
+    path("speech/", include("speechToSpeech.urls")),
 ]

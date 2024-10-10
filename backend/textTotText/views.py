@@ -6,12 +6,7 @@ from .forms import TextInputForm
 
 
 # Create your views here.
-
-def index(request):
-    return HttpResponse("Hello, world. You're at the textTotText index.")
-
-
-def input_view(request):
+def text_to_text_view(request):
     if request.method == 'POST':
         form = TextInputForm(request.POST)
         if form.is_valid():

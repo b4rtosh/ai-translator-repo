@@ -1,50 +1,50 @@
 import os
 from pydub import AudioSegment
 import azure.cognitiveservices.speech as speechsdk
-from moviepy.editor import VideoFileClip
+from dotenv import load_dotenv
+
 
 # Konwersja MP3 do WAV
 def convert_mp3_to_wav(mp3_path, wav_path):
     audio = AudioSegment.from_mp3(mp3_path)
     audio.export(wav_path, format="wav")
 
-# Rozpoznawanie mowy za pomocą Azure Speech Service
-def recognize_speech_from_audio(wav_path, speech_key, service_region):
-    # Tworzenie konfiguracji dla usługi Azure Speech
-    speech_config = speechsdk.SpeechConfig(subscription=speech_key, region=service_region)
-    audio_input = speechsdk.AudioConfig(filename=wav_path)
 
-    # Tworzenie obiektu rozpoznawania mowy
+def recognize_speech_from_audio(audio_data):
+    load_dotenv()
+    speech_key = os.getenv('API_KEY_SPEECH')
+    service_region = os.getenv('API_LOCATION')
+
+    # Create configuration for Azure Speech Service
+    speech_config = speechsdk.SpeechConfig(subscription=speech_key, region=service_region)
+
+    # Create a PushAudioInputStream for handling raw byte data
+    push_stream = speechsdk.audio.PushAudioInputStream()
+
+    # Write the byte data to the push stream
+    push_stream.write(audio_data)
+    push_stream.close()  # Close after writing all data
+
+
+    # Pass the audio stream to the AudioConfig
+    audio_input = speechsdk.AudioConfig(stream=push_stream)
+
+    # Create the speech recognizer
     speech_recognizer = speechsdk.SpeechRecognizer(speech_config=speech_config, audio_config=audio_input)
 
-    print("Rozpoczynanie rozpoznawania mowy...")
+    print("Starting speech recognition...")
 
-    # Wywołanie synchronizujące na rozpoznanie mowy (zwraca po zakończeniu rozpoznawania)
+    # Synchronously call the speech recognizer (returns after recognition completes)
     result = speech_recognizer.recognize_once()
 
-    # Obsługa wyników
+    # Handle results
     if result.reason == speechsdk.ResultReason.RecognizedSpeech:
-        print("Rozpoznany tekst:", result.text)
+        print("Success")
+        return result.text
     elif result.reason == speechsdk.ResultReason.NoMatch:
-        print("Nie rozpoznano żadnej mowy.")
+        print("No speech could be recognized.")
     elif result.reason == speechsdk.ResultReason.Canceled:
         cancellation_details = result.cancellation_details
-        print(f"Rozpoznawanie anulowane: {cancellation_details.reason}")
+        print(f"Speech recognition canceled: {cancellation_details.reason}")
         if cancellation_details.reason == speechsdk.CancellationReason.Error:
-            print(f"Błąd: {cancellation_details.error_details}")
-
-# Ścieżki do pliku MP3 i docelowego pliku WAV
-video_path = "film.mp4"
-mp3_path = 'audio.mp3'  # Podaj ścieżkę do swojego pliku MP3
-wav_path = 'plik.wav'  # Tymczasowy plik WAV
-
-# Klucz API i region Azure Speech Service
-speech_key = "84d3af67396442ddaec8c499ff208bfd"  # Zamień na swój klucz API Azure
-service_region = "westeurope"  # Region np. "westeurope"
-
-# Konwertujemy MP3 do WAV
-convert_mp3_to_wav(mp3_path, wav_path)
-
-# Rozpoznawanie mowy
-recognize_speech_from_audio(wav_path, speech_key, service_region)
-
+            print(f"Error: {cancellation_details.error_details}")

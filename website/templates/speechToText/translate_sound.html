@@ -10,27 +10,28 @@
             <form id="sound-form" enctype="multipart/form-data" method="post">
                 {% csrf_token %}
                 <div class="mb-3">
-                    <label for="sound-file" class="form-label">Choose your audio file:</label>
-                    <input type="file" id="sound-file" name="sound_file" accept="audio/*" class="form-control" required>
+                    <label for="uploaded-file" class="form-label">Choose your audio file:</label>
+                    <input type="file" id="uploaded-file" name="uploaded-file"  class="form-control" required accept="audio/*">
                 </div>
 
                 <div class="mb-3">
-                    <label for="language-select-source" class="form-label">Select source audio file language:</label>
-                    <select id="language-sound" name="language_sound" class="form-control">
-                        {% for code, name in languages.items %}
-                            <option value="{{ code }}" {% if code == selected_language_before %}selected{% endif %}>
-                                {{ name }}
+                    <label for="language-source" class="form-label">Select source audio file language:</label>
+                    <select id="language-source" name="language-source" class="form-control">
+                        <option selected value="auto">Detect</option>
+                        {% for language in languages %}
+                            <option value="{{ language.code }}" {% if language.code == selected_language_before %}selected{% endif %}>
+                                {{ language.name }}
                             </option>
                         {% endfor %}
                     </select>
                 </div>
 
                 <div class="mb-3">
-                    <label for="language-select-target" class="form-label">Select target text language:</label>
-                    <select id="language-sound" name="language_sound" class="form-control">
-                        {% for code, name in languages.items %}
-                            <option value="{{ code }}" {% if code == selected_language_before %}selected{% endif %}>
-                                {{ name }}
+                    <label for="language-target" class="form-label">Select target text language:</label>
+                    <select id="language-target" name="language-target" class="form-control">
+                        {% for language in languages %}
+                            <option value="{{ language.code }}" {% if language.code == selected_language_after %}selected{% endif %}>
+                                {{ language.name }}
                             </option>
                         {% endfor %}
                     </select>
@@ -40,7 +41,7 @@
             </form>
 
             <h2 class="mt-4">Translated text:</h2>
-            <div id="translated-text" class="alert alert-secondary"></div>
+            <div id="translated-text"  class="alert alert-secondary">{{translated_text}}</div>
         </div>
     </div>
 </div>

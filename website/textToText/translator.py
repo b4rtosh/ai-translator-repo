@@ -21,7 +21,7 @@ def translateToFrom(langFrom, langTo, text):
     params = {
         'api-version': '3.0',
         'from': langFrom,
-        'to': langTo
+        'to': langTo,
     }
 
     headers = {
@@ -40,4 +40,4 @@ def translateToFrom(langFrom, langTo, text):
     request = requests.post(constructed_url, params=params, headers=headers, json=body)
     if request.status_code != 200:
         raise Exception(request.status_code, request.text)
-    return request.json()[0]['translations'][0]['text']
+    return request.json()

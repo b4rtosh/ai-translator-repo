@@ -24,7 +24,7 @@
     </style>
 </head>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand ml-3" >Translator</a>
+    <a class="navbar-brand ms-3" >AI Translator</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -34,13 +34,13 @@
                 <a class="nav-link" href="{% url 'home' %}">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'text_to_text_view' %}">Translate from Text to Text</a>
+                <a class="nav-link" href="{% url 'text_to_text_view' %}">Text to Text</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'speech_to_text_view' %}">Translate from Sound to Text</a>
+                <a class="nav-link" href="{% url 'speech_to_text_view' %}">Speech to Text</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'speech_to_speech_view' %}">Translate from Sound to Sound</a>
+                <a class="nav-link" href="{% url 'speech_to_speech_view' %}">Speech to Speech</a>
             </li>
         </ul>
     </div>
@@ -49,7 +49,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>{% block header %}Welcome to the Translator App{% endblock %}</h1>
+            <h1>{% block header %}Welcome to the AI Translator App{% endblock %}</h1>
         </div>
 
         {% block content %}

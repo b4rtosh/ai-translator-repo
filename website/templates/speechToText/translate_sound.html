@@ -1,19 +1,18 @@
 {% extends 'base.html' %}
 
-{% block title %}Translate Sound{% endblock %}
+{% block title %}Translate Speech to Text{% endblock %}
 
 {% block content %}
 <div class="container mt-4">
     <div class="card">
         <div class="card-body">
-            <h2>Translate sound to text</h2>
+            <h2>Translate speech to text</h2>
             <form id="sound-form" enctype="multipart/form-data" method="post">
                 {% csrf_token %}
                 <div class="mb-3">
                     <label for="uploaded-file" class="form-label">Choose your audio file:</label>
                     <input type="file" id="uploaded-file" name="uploaded-file"  class="form-control" required accept="audio/*">
                 </div>
-
                 <div class="mb-3">
                     <label for="language-source" class="form-label">Select source audio file language:</label>
                     <select id="language-source" name="language-source" class="form-control">

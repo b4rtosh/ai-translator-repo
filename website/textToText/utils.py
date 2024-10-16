@@ -24,6 +24,7 @@ def get_supported_languages():
             {'code': code, 'name': details['name']}
             for code, details in languages.items()
         ]
+        simplified_languages.sort(key=lambda x: x['name'])
         print(simplified_languages)
         # Cache the response for future use
         cache.set(cache_key, simplified_languages, CACHE_TIMEOUT)

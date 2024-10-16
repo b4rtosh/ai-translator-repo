@@ -27,7 +27,7 @@
                     <label for="language-target" class="form-label">Choose target text language:</label>
                     <select id="language-target" name="language-target" class="form-control">
                         {% for language in languages %}
-                            <option value="{{ language.code }}" {% if language.code == selected_language_before %}selected{% endif %}>
+                            <option value="{{ language.code }}" {% if language.code == selected_language_after %}selected{% endif %}>
                                 {{ language.name }}
                             </option>
                         {% endfor %}

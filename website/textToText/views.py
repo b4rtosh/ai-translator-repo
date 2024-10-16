@@ -12,13 +12,16 @@ def text_to_text_view(request):
         print(source_language)
         target_language = request.POST.get('language-target')
         print(target_language)
-        translated_text = translator.translateToFrom(source_language, target_language, input_text)
-        if source_language == 'auto':
-            source_language = translated_text[0]['detectedLanguage']['language']
-        translated_text = translated_text[0]['translations'][0]['text']
+        if source_language != target_language:
+            translated_text = translator.translateToFrom(source_language, target_language, input_text)
+            if source_language == 'auto':
+                source_language = translated_text[0]['detectedLanguage']['language']
+            translated_text = translated_text[0]['translations'][0]['text']
+        else:
+            translated_text = input_text
         return render(request, 'textToText/translate_text.html',
-                      {'input-text': input_text, 'selected_language_before': source_language,
+                      {'input_text': input_text, 'selected_language_before': source_language,
                        'selected_language_after': target_language, 'translated_text': translated_text,
-                       'languages' : languages})
+                       'languages': languages})
     return render(request, 'textToText/translate_text.html', {'languages': languages})
 

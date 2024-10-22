@@ -3,6 +3,11 @@
 {% block title %}Translate Speech to Speech{% endblock %}
 
 {% block content %}
+     {% if error %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }} <!-- Tutaj pojawi się to, co w views.py dasz jako wartość error. Więc jak w logic edasz np. if not coś tam, to error = "Tekst erroru wyświetlony użytknownikowi" -->
+        </div>
+    {% endif %}
     <div class="card">
         <div class="card-body">
             <h2>Translate speech to speech</h2>

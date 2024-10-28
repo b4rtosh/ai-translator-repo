@@ -13,11 +13,10 @@ def speech_to_text_view(request):
     languages = utils.get_supported_languages()
     if request.method == 'POST':
         catalog = request.FILES['uploaded-file']
-        file_content = catalog.read()
 
         # save temporarily the file and get the path
         temp_dir = tempfile.gettempdir()
-        audio_file_path = os.path.join(temp_dir, 'uploaded_file.wav')
+        audio_file_path = os.path.join(temp_dir, catalog.name)
         with open(audio_file_path, 'wb') as f:
             for chunk in catalog.chunks():
                 f.write(chunk)

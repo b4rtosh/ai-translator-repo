@@ -28,10 +28,10 @@
         </div>
     </div>
 
-    {% if audio_stream %}
+    {% if audio %}
     <h2 class="mt-4">Generated Speech (Stream):</h2>
     <audio id="audioPlayer" controls>
-        <source src="data:audio/wav;base64,{{ audio_data }}" type="audio/wav">
+        <source src="data:audio/wav;base64,{{ audio }}" type="audio/wav">
         Your browser does not support the audio element.
     </audio>
 

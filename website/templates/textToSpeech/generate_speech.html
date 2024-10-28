@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Speech Synthesis{% endblock %}
+
+{% block content %}
+    {% if error %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+    {% endif %}
+
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-body">
+                <h2>Generate Speech</h2>
+                <form id="speech-form" method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="text-input" class="form-label">Enter the text to convert to speech:</label>
+                        <textarea class="form-control" id="text-input" name="text-input" rows="3" required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-custom">Generate Speech</button>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+
+    {% if audio_stream %}
+    <h2 class="mt-4">Generated Speech (Stream):</h2>
+    <audio id="audioPlayer" controls>
+        <source src="data:audio/wav;base64,{{ audio_data }}" type="audio/wav">
+        Your browser does not support the audio element.
+    </audio>
+
+    {% endif %}
+{% endblock %}

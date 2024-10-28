@@ -24,4 +24,5 @@ urlpatterns = [
     path('translate/', include("textToText.urls")),
     path('transcribe/', include("speechToText.urls")),
     path('speech/', include("speechToSpeech.urls")),
+    path('generate/', include("textToSpeech.urls")),
 ]

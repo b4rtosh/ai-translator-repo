@@ -10,7 +10,7 @@ def convert_mp3_to_wav(mp3_path, wav_path):
     audio.export(wav_path, format="wav")
 
 
-def recognize_speech_from_audio(audio_data):
+def recognize_speech_from_audio(audio_path):
     load_dotenv()
     speech_key = os.getenv('API_KEY_SPEECH')
     service_region = os.getenv('API_LOCATION')
@@ -18,16 +18,7 @@ def recognize_speech_from_audio(audio_data):
     # Create configuration for Azure Speech Service
     speech_config = speechsdk.SpeechConfig(subscription=speech_key, region=service_region)
 
-    # Create a PushAudioInputStream for handling raw byte data
-    push_stream = speechsdk.audio.PushAudioInputStream()
-
-    # Write the byte data to the push stream
-    push_stream.write(audio_data)
-    push_stream.close()  # Close after writing all data
-
-
-    # Pass the audio stream to the AudioConfig
-    audio_input = speechsdk.AudioConfig(stream=push_stream)
+    audio_input = speechsdk.AudioConfig(filename=audio_path)
 
     # Create the speech recognizer
     speech_recognizer = speechsdk.SpeechRecognizer(speech_config=speech_config, audio_config=audio_input)

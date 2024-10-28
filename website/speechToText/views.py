@@ -1,3 +1,6 @@
+import os
+import tempfile
+from gettext import translation
 from idlelib.pyparse import trans
 
 from django.shortcuts import render
@@ -11,16 +14,27 @@ def speech_to_text_view(request):
     if request.method == 'POST':
         catalog = request.FILES['uploaded-file']
         file_content = catalog.read()
+
+        # save temporarily the file and get the path
+        temp_dir = tempfile.gettempdir()
+        audio_file_path = os.path.join(temp_dir, 'uploaded_file.wav')
+        with open(audio_file_path, 'wb') as f:
+            for chunk in catalog.chunks():
+                f.write(chunk)
+        print(audio_file_path)
         source_language = request.POST.get('language-source')
         print(source_language)
         target_language = request.POST.get('language-target')
         print(target_language)
-        transcribed = speechToText.recognize_speech_from_audio(file_content)
+        transcribed = speechToText.recognize_speech_from_audio(audio_file_path)
         print(transcribed)
-        translation = translator.translateToFrom(source_language, target_language, transcribed)
-        if source_language == 'auto':
-            source_language = translation[0]['detectedLanguage']['language']
-        translation = translation[0]['translations'][0]['text']
+        translation = transcribed
+        if source_language != target_language:
+            translation = translator.translate_text(transcribed, source_language, target_language)
+            if source_language == 'auto':
+                source_language = translation[0]['detectedLanguage']['language']
+            translation = translation[0]['translations'][0]['text']
+        os.remove(audio_file_path)
         return render(request, 'speechToText/translate_sound.html',
                       {'languages': languages, 'selected_language_before': source_language,
                        'selected_language_after': target_language, 'translated_text': translation})

@@ -30,7 +30,7 @@ def speech_to_text_view(request):
         print(transcribed)
         translation = transcribed
         if source_language != target_language:
-            translation = translator.translate_text(transcribed, source_language, target_language)
+            translation = translator.translateToFrom(source_language, target_language, transcribed)
             if source_language == 'auto':
                 source_language = translation[0]['detectedLanguage']['language']
             translation = translation[0]['translations'][0]['text']

@@ -4,7 +4,7 @@ from django.conf import settings
 
 # Constants
 AZURE_TRANSLATOR_LANGUAGES_URL = 'https://api.cognitive.microsofttranslator.com/languages?api-version=3.0'
-CACHE_TIMEOUT = 60  # 1 minute in seconds
+CACHE_TIMEOUT = 3600  # 1 hour in seconds
 
 
 def get_supported_languages():

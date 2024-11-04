@@ -3,11 +3,12 @@
 {% block title %}Translate Speech to Text{% endblock %}
 
 {% block content %}
-     {% if error %}
-        <div class="alert alert-danger" role="alert"> <!-- Tutaj pojawi się to, co w views.py dasz jako wartość error. Więc jak w logic edasz np. if not coś tam, to error = "Tekst erroru wyświetlony użytknownikowi" -->
-            {{ error }}
-        </div>
-    {% endif %}
+{% if error %}
+<div class="alert alert-danger" role="alert">
+    <!-- Tutaj pojawi się to, co w views.py dasz jako wartość error. Więc jak w logic edasz np. if not coś tam, to error = "Tekst erroru wyświetlony użytknownikowi" -->
+    {{ error }}
+</div>
+{% endif %}
 <div class="container mt-4">
     <div class="card">
         <div class="card-body">
@@ -16,27 +17,32 @@
                 {% csrf_token %}
                 <div class="mb-3">
                     <label for="uploaded-file" class="form-label">Choose your audio file:</label>
-                    <input type="file" id="uploaded-file" name="uploaded-file"  class="form-control" required accept="audio/*">
+                    <input type="file" id="uploaded-file" name="uploaded-file" class="form-control" required
+                           accept="audio/*">
                 </div>
+                {% if selected_language_before %}
                 <div class="mb-3">
-                    <label for="language-source" class="form-label">Select source audio file language:</label>
-                    <select id="language-source" name="language-source" class="form-control">
+                    <label for="language-source" class="form-label">Detected source audio file language:</label>
+                    <select id="language-source" name="language-source" class="form-control" disabled>
                         <option selected value="auto">Detect</option>
                         {% for language in languages %}
-                            <option value="{{ language.code }}" {% if language.code == selected_language_before %}selected{% endif %}>
-                                {{ language.name }}
-                            </option>
+                        {% if language.code == selected_language_before %}
+
+                        <option value="{{ language.code }}" selected>
+                            {{ language.name }}
+                        </option>
+                        {% endif %}
                         {% endfor %}
                     </select>
                 </div>
-
+                {% endif %}
                 <div class="mb-3">
                     <label for="language-target" class="form-label">Select target text language:</label>
                     <select id="language-target" name="language-target" class="form-control">
                         {% for language in languages %}
-                            <option value="{{ language.code }}" {% if language.code == selected_language_after %}selected{% endif %}>
-                                {{ language.name }}
-                            </option>
+                        <option value="{{ language.code }}" {% if language.code == selected_language_after %}selected{% endif %}>
+                            {{ language.name }}
+                        </option>
                         {% endfor %}
                     </select>
                 </div>
@@ -45,7 +51,7 @@
             </form>
 
             <h2 class="mt-4">Translated text:</h2>
-            <div id="translated-text"  class="alert alert-secondary">{{translated_text}}</div>
+            <div id="translated-text" class="alert alert-secondary">{{translated_text}}</div>
         </div>
     </div>
 </div>

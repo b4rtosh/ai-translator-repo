@@ -17,8 +17,34 @@
                     {% csrf_token %}
                     <div class="mb-3">
                         <label for="text-input" class="form-label">Enter the text to convert to speech:</label>
-                        <textarea class="form-control" id="text-input" name="text-input" rows="3" required></textarea>
+                        <textarea class="form-control" id="text-input" name="text-input" rows="3" required>{{text_input}}</textarea>
                     </div>
+                    {% if selected_language_before %}
+                <div class="mb-3">
+                    <label for="language-source" class="form-label">Detected language:</label>
+                    <select id="language-source" name="language-source" class="form-control" disabled>
+                        <option selected value="auto">Detect</option>
+                        {% for language in languages %}
+                        {% if language.code == selected_language_before %}
+
+                        <option value="{{ language.code }}" selected>
+                            {{ language.name }}
+                        </option>
+                        {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+                {% endif %}
+                    <div class="mb-3">
+                    <label for="language-target" class="form-label">Select target audio language:</label>
+                    <select id="language-target" name="language-target" class="form-control">
+                        {% for speech in speeches %}
+                            <option value="{{ speech.Code }}" {% if speech.Code == selected_language_after %}selected{% endif %}>
+                                {{ speech.Language }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
 
                     <button type="submit" class="btn btn-custom">Generate Speech</button>
                 </form>

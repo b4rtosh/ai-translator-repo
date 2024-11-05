@@ -1,7 +1,7 @@
 import os
 import tempfile
 from django.shortcuts import render
-from . import speechToText
+from . import utils as transcribe_utils
 from textToText import translator, utils
 
 
@@ -21,7 +21,7 @@ def speech_to_text_view(request):
         # source_language = request.POST.get('language-source')
         target_language = request.POST.get('language-target')
         print(target_language)
-        transcribed = speechToText.recognize_speech_from_audio(audio_file_path)
+        transcribed = utils.recognize_speech_from_audio(audio_file_path)
         print(transcribed)
         translation = transcribed
         # if source_language != target_language:

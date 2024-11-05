@@ -36,9 +36,9 @@
                 <div class="mb-3">
                     <label for="language-target" class="form-label">Select target audio language:</label>
                     <select id="language-target" name="language-target" class="form-control">
-                        {% for language in languages %}
-                            <option value="{{ language.code }}" {% if language.Code == selected_language_after %}selected{% endif %}>
-                                {{ language.Language }}
+                        {% for speech in speeches %}
+                            <option value="{{ speech.Code }}" {% if speech.Code == selected_language_after %}selected{% endif %}>
+                                {{ speech.Language }}
                             </option>
                         {% endfor %}
                     </select>

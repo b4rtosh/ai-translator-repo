@@ -1,14 +1,71 @@
 {% extends 'base.html' %}
 
+
 {% block title %}Home - Translator{% endblock %}
 
 {% block header %}Welcome to the AI Translator App{% endblock %}
 
 {% block content %}
-    <div class="text-center">
-        <a href="{% url 'text_to_text_view' %}" class="btn btn-lg btn-custom mx-2">Translate Text</a>
-        <a href="{% url 'speech_to_text_view' %}" class="btn btn-lg btn-custom mx-2">Translate Sound File to Text</a>
-        <a href="{% url 'text_to_speech_view' %}" class="btn btn-lg btn-custom mx-2">Translate Text to Speech</a>
-        <a href="{% url 'speech_to_speech_view' %}" class="btn btn-lg btn-custom mx-2">Translate Sound File to Speech</a>
+    <div class="container text-center mt-4">
+        <div class="row row-cols-1 row-cols-md-2 g-4 mb-5">
+            <div class="col">
+                <a href="{% url 'text_to_text_view' %}" class="card h-100 text-decoration-none text-dark">
+                    <div class="card-body">
+                        <h5 class="card-title">Text to Text</h5>
+                        <p class="card-text">Convert text from one language to another instantly.</p>
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a href="{% url 'speech_to_text_view' %}" class="card h-100 text-decoration-none text-dark">
+                    <div class="card-body">
+                        <h5 class="card-title">Speech to Text</h5>
+                        <p class="card-text">Transcribe and translate audio into text.</p>
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a href="{% url 'text_to_speech_view' %}" class="card h-100 text-decoration-none text-dark">
+                    <div class="card-body">
+                        <h5 class="card-title">Text to Speech</h5>
+                        <p class="card-text">Turn text into spoken audio in various languages.</p>
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a href="{% url 'speech_to_speech_view' %}" class="card h-100 text-decoration-none text-dark">
+                    <div class="card-body">
+                        <h5 class="card-title">Speech to Speech</h5>
+                        <p class="card-text">Convert one language's audio into another language's audio.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
     </div>
+    <section class="intro-section">
+    <center>
+            <p>Our AI Translator App offers seamless and accurate translation services, allowing you to easily convert text and audio into multiple languages.</p>
+            <p>Whether you need quick text translations or audio-based language conversion, we provide a fast, user-friendly, and efficient experience.</p>
+    </center>
+    </section>
+
+        <section class="features-section">
+        <center>
+            <h2>Features</h2>
+                <p><strong>Translate Text:</strong> Easily translate text to and from numerous languages with just a few clicks.</p>
+                <p><strong>Translate Audio:</strong> Convert audio files into text and translate them to your desired language.</p>
+                <p><strong>Multilingual Support:</strong> Over 20 languages supported, with both male and female voice options.</p>
+                <p><strong>Audio Translation:</strong> Translate a sound file to another sound file in the blink of an eye.</p>
+                <p><strong>Simple Interface:</strong> Intuitive and easy-to-use design tailored for all users.</p>
+        </center>
+
+        </section>
+
+        <section class="get-started-section">
+        <center>
+           <h2>Get Started</h2>
+            <p>To begin, select an option from the menu. Whether you want to translate text or upload an audio file, our powerful AI will handle it in seconds.</p>
+            <p>Let’s make language barriers a thing of the past!</p>
+        </center>
+        </section>
 {% endblock %}
